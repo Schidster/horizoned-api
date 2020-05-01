@@ -1,0 +1,99 @@
+[
+  {
+    "name": "api",
+    "image": "api:latest",
+    "cpu": 250,
+    "memory": 512,
+    "memoryReservation": 400,
+    "portMappings": [
+      {
+        "containerPort": 8000,
+        "protocol": "tcp"
+      }
+    ],
+    "essential": true,
+    "mountPoints": [
+      {
+        "sourceVolume": "static",
+        "containerPath": "/api/static"
+      }
+    ],
+    "environment": [
+    ],
+    "secrets": [
+      {
+        "name": "DJANGO_ALLOWED_HOSTS",
+        "valueFrom": "arn:aws:ssm:ap-south-1:149711720779:parameter/api/allowed-hosts"
+      },
+      {
+        "name": "DJANGO_SERCRET_KEY",
+        "valueFrom": "arn:aws:ssm:ap-south-1:149711720779:parameter/api/secret-key"
+      },
+      {
+        "name": "DJANGO_ENVIRONMENT",
+        "valueFrom": "arn:aws:ssm:ap-south-1:149711720779:parameter/api/environment"
+      }
+    ],
+    "disableNetworking": false,
+    "privileged": false,
+    "readonlyRootFilesystem": false,
+    "interactive": true,
+    "pseudoTerminal": true,
+    "dockerLabels": {
+      "version": "0.0.1dev"
+    },
+    "resourceRequirements": null,
+    "volumesFrom": null,
+    "hostname": null,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "horizoned-api",
+        "awslogs-region": "ap-south-1",
+        "awslogs-stream-prefix": "awslogs-horizoned"
+      }
+    },
+    "ulimits": null
+  },
+  {
+    "name": "server",
+    "image": "server:latest",
+    "cpu": 250,
+    "memory": 512,
+    "memoryReservation": 400,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "protocol": "tcp"
+      }
+    ],
+    "essential": true,
+    "mountPoints": [
+      {
+        "sourceVolume": "static",
+        "containerPath": "/api/static"
+      }
+    ],
+    "hostname": null,
+    "dependsOn": null,
+    "disableNetworking": false,
+    "privileged": false,
+    "readonlyRootFilesystem": false,
+    "interactive": true,
+    "pseudoTerminal": true,
+    "dockerLabels": {
+      "version": "0.0.1dev"
+    },
+    "resourceRequirements": null,
+    "volumesFrom": null,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "horizoned-server",
+        "awslogs-region": "ap-south-1",
+        "awslogs-stream-prefix": "awslogs-horizoned"
+      }
+    },
+    "ulimits": null
+  }
+]
