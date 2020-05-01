@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+
+    api:
+        build: ./api
+        environment: 
+            DJANGO_ENVIRONMENT: development
+        volumes: 
+            - static_volume:/api/static
+        networks: 
+            - server_network
+
+    server:
+        build: ./server
+        volumes:
+            - static_volume:/api/static
+        ports: 
+            - 8000:80
+        depends_on: 
+            - api
+        networks:
+            - server_network
+
+networks: 
+    server_network:
+        driver: bridge
+volumes:
+    static_volume:
+
+        
