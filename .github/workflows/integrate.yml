@@ -1,0 +1,31 @@
+name: Integrate
+
+on:
+  push:
+    paths:
+      - 'api/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: "x64"
+
+    - name: Install Dependencies
+      run: pip install -r api/requirements/test.txt
+
+    - name: Run Tests
+      env:
+        DJANGO_ENVIRONMENT: test
+      run: python api/manage.py test
