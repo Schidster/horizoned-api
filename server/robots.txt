@@ -1,0 +1,11 @@
+User-agent: Bingbot
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Googlebot
+Disallow: /api
+
+User-agent: *
+Dissallow: /
