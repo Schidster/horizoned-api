@@ -1,0 +1,5 @@
+-r base.txt
+
+psycopg2-binary==2.8.5
+pyjwt==1.7.1
+whitenoise==5.0.1

@@ -1,0 +1,8 @@
+-r base.txt
+
+entrypoints==0.3
+flake8==3.7.9
+mccabe==0.6.1
+model-mommy==2.0.0
+pycodestyle==2.5.0
+pyflakes==2.2.0
